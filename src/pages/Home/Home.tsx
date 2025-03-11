@@ -2,56 +2,28 @@ import React from "react";
 import Card from "../../components/Card/Card";
 import "./home.css";
 import Searchbar from "../../components/Searchbar/Searchbar";
-import { Character } from "../../types/Hero";
-
-const heroes: Character[] = [
-  {
-    id: 1,
-    imgUrl: "",
-    name: "",
-    favourite: false,
-  },
-  {
-    id: 2,
-    imgUrl: "",
-    name: "",
-    favourite: false,
-  },
-  {
-    id: 3,
-    imgUrl: "",
-    name: "",
-    favourite: false,
-  },
-  {
-    id: 4,
-    imgUrl: "",
-    name: "",
-    favourite: false,
-  },
-  {
-    id: 5,
-    imgUrl: "",
-    name: "",
-    favourite: false,
-  },
-  {
-    id: 6,
-    imgUrl: "",
-    name: "",
-    favourite: false,
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import { getAllCharacters } from "../../services/characterService";
 
 const Home: React.FC = () => {
+  const { data: characters } = useQuery({
+    queryKey: ["characters"],
+    queryFn: getAllCharacters,
+  });
+
   return (
     <div className="main-container">
       <div>Welcome to the Home Page</div>
       <Searchbar />
       <div className="cards-container">
-        {heroes.map((hero) => (
-          <Card key={hero.id} imgUrl={""} name={""} isFavourite={false} />
-        ))}
+        {characters &&
+          characters.map((character) => (
+            <Card
+              key={character.id}
+              character={character}
+              isFavourite={false}
+            />
+          ))}
       </div>
     </div>
   );

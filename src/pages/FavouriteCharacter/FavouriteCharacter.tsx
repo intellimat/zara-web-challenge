@@ -1,6 +1,6 @@
 import React from "react";
 
-const FavouriteHeroes: React.FC = () => {
+const FavouriteCharacter: React.FC = () => {
   return (
     <div>
       <h1>Favourite Heroes</h1>
@@ -9,4 +9,4 @@ const FavouriteHeroes: React.FC = () => {
   );
 };
 
-export default FavouriteHeroes;
+export default FavouriteCharacter;
