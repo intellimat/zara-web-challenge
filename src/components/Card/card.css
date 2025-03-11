@@ -1,0 +1,25 @@
+.box {
+  position: relative;
+  height: 300px;
+  /* width: 200px;  */
+}
+.box:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: lightblue; /* border color */
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 44px),
+    calc(100% - 44px) 100%,
+    0 100%,
+    0 0,
+    10px 10px,
+    10px calc(100% - 10px),
+    calc(100% - 44px - 4.14px) calc(100% - 10px),
+    calc(100% - 10px) calc(100% - 44px - 4.14px),
+    calc(100% - 10px) 10px,
+    10px 10px
+  );
+}
