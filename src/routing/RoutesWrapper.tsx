@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router";
 import Home from "../pages/Home/Home";
 import Charachter from "../pages/Charachter/Charachter";
 import RootLayout from "./RootLayout";
+import FavouriteHeroes from "../pages/FavouriteHeroes/FavouriteHeroes";
 
 const RoutesWrapper = () => {
   return (
@@ -11,6 +12,7 @@ const RoutesWrapper = () => {
         <Route path="/charachter">
           <Route path=":id" element={<Charachter />} />
         </Route>
+        <Route path="/favouriteHeroes" element={<FavouriteHeroes />} />
       </Route>
     </Routes>
   );
