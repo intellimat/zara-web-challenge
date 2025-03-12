@@ -1,25 +1,39 @@
 .box {
-  position: relative;
-  height: 300px;
-  /* width: 200px;  */
+  color: white;
+  background-color: black;
+  /* width: 200px; */
+  height: 270px;
+  --mask: linear-gradient(-45deg, #0000 11.31px, #000 0);
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
 }
-.box:before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: lightblue; /* border color */
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - 44px),
-    calc(100% - 44px) 100%,
-    0 100%,
-    0 0,
-    10px 10px,
-    10px calc(100% - 10px),
-    calc(100% - 44px - 4.14px) calc(100% - 10px),
-    calc(100% - 10px) calc(100% - 44px - 4.14px),
-    calc(100% - 10px) 10px,
-    10px 10px
-  );
+
+.box .character-img {
+  border-bottom: 2px red solid;
+  width: 100%;
+}
+
+.box .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.box .title-container {
+  padding: 0 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box .title-container .heart-button {
+  background-color: transparent;
+  width: 24px;
+  height: 22px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  height: fit-content;
+  width: fit-content;
+  cursor: pointer;
 }
