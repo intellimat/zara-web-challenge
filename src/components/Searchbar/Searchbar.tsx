@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./searchbar.css";
 
 const Searchbar: React.FC = () => {
   const [query, setQuery] = useState("");
@@ -7,20 +8,15 @@ const Searchbar: React.FC = () => {
     setQuery(event.target.value);
   };
 
-  const handleSearch = () => {
-    // Implement search logic here
-    console.log("Searching for:", query);
-  };
-
   return (
-    <div>
+    <div className="searchbar">
+      <img src="icons/lens.svg" alt="search icon" />
       <input
         type="text"
         value={query}
         onChange={handleInputChange}
-        placeholder="Search..."
+        placeholder="SEARCH A CHARACTER..."
       />
-      <button onClick={handleSearch}>Search</button>
     </div>
   );
 };

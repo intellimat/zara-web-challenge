@@ -10,10 +10,8 @@ const Home: React.FC = () => {
     queryKey: ["characters"],
     queryFn: getAllCharacters,
   });
-
   return (
     <div className="main-container">
-      <div>Welcome to the Home Page</div>
       <Searchbar />
       <div className="cards-container">
         {characters &&

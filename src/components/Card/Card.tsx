@@ -21,30 +21,37 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({ character, isFavourite }) => {
+  const characterImgUrl =
+    character.thumbnail.path +
+    "/" +
+    ThumbnailLayouts.standard +
+    "_" +
+    ThumbnailSizes.xlarge +
+    "." +
+    character.thumbnail.extension;
+
+  const handleBtnClick = () => {
+    // toggle isFavourite
+  };
+
+  const heartIconUrl = isFavourite
+    ? "icons/full_heart.svg"
+    : "icons/empty_heart.svg";
+
   return (
-    <div className="box cut-box">
-      {/* Character Image Section */}
-      <div>
-        <img
-          src={
-            character.thumbnail.path +
-            "/" +
-            ThumbnailLayouts.standard +
-            "_" +
-            ThumbnailSizes.xlarge +
-            "." +
-            character.thumbnail.extension
-          }
-          alt={character.name + " thumbnail"}
-        />
-      </div>
+    <div className="box">
+      <img
+        className="character-img"
+        src={characterImgUrl}
+        alt={character.name + " thumbnail"}
+        height={200}
+      />
 
-      {/* Red Divider Line */}
-      <div></div>
-
-      {/* Name and Like Section */}
-      <div className="title">
-        <p>{character.name}</p>
+      <div className="title-container">
+        <p className="title">{character.name}</p>
+        <button className="heart-button" onClick={handleBtnClick}>
+          <img src={heartIconUrl} height={18} width={20} alt="Heart icon" />
+        </button>
       </div>
     </div>
   );

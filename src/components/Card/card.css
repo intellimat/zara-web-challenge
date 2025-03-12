@@ -1,13 +1,39 @@
 .box {
-  width: 200px;
-  background: black;
   color: white;
-  position: relative;
+  background-color: black;
+  /* width: 200px; */
+  height: 270px;
+  --mask: linear-gradient(-45deg, #0000 11.31px, #000 0);
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
 }
 
-.cut-box {
-  border-radius: 50px;
-  border-top-right-radius: 50% 100%;
-  border-bottom-right-radius: 50% 100%;
-  background: linear-gradient(135deg, transparent 45px, black 0);
+.box .character-img {
+  border-bottom: 2px red solid;
+  width: 100%;
+}
+
+.box .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.box .title-container {
+  padding: 0 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box .title-container .heart-button {
+  background-color: transparent;
+  width: 24px;
+  height: 22px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  height: fit-content;
+  width: fit-content;
+  cursor: pointer;
 }
