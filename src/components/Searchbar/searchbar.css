@@ -1,18 +1,26 @@
 .searchbar {
+  margin: 60px 0;
+}
+
+.searchbar p {
+  font-size: 12px;
+}
+
+.searchbar .input-wrapper {
   display: flex;
   justify-content: left;
   align-items: center;
   border-bottom: 1px solid grey;
-  margin: 60px 0;
   padding-bottom: 8px;
 }
 
-.searchbar input {
+.searchbar .input-wrapper input {
   border: none;
   background-color: transparent;
   width: 100%;
+  outline: none;
 }
 
-.searchbar img {
+.searchbar .input-wrapper img {
   margin-right: 6px;
 }

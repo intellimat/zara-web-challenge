@@ -18,9 +18,16 @@ export const ThumbnailSizes = {
 interface Props {
   character: Character;
   isFavourite: boolean;
+  addFavouriteCharacter: (character: Character) => void;
+  removeFavouriteCharacter: (characterId: number) => void;
 }
 
-const Card: React.FC<Props> = ({ character, isFavourite }) => {
+const Card: React.FC<Props> = ({
+  character,
+  isFavourite,
+  addFavouriteCharacter,
+  removeFavouriteCharacter,
+}) => {
   const characterImgUrl =
     character.thumbnail.path +
     "/" +
@@ -31,7 +38,11 @@ const Card: React.FC<Props> = ({ character, isFavourite }) => {
     character.thumbnail.extension;
 
   const handleBtnClick = () => {
-    // toggle isFavourite
+    if (!isFavourite) {
+      addFavouriteCharacter(character);
+    } else {
+      removeFavouriteCharacter(character.id);
+    }
   };
 
   const heartIconUrl = isFavourite
