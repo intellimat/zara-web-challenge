@@ -1,0 +1,16 @@
+.banner-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 24px;
+  background-color: black;
+  color: white;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.banner-container .information .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

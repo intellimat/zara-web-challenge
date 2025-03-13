@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Character } from "../types/Hero";
+import { Character } from "../types/Character";
 import { devtools } from "zustand/middleware";
 
 type Store = {
