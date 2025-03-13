@@ -4,6 +4,9 @@
 
   background-color: #f0f0f0;
   color: #242424;
+
+  /* Colors */
+  --marvel-red: #ec1d24;
 }
 
 body {

@@ -1,13 +1,12 @@
 import { Character } from "../types/Character";
+import { ENDPOINTS } from "./endpoints";
 import { GetCharactersResponse } from "./types";
 import { hash, PUBLIC_KEY, TIMESTAMP } from "./utils/auth";
 import buildUrl from "./utils/buildUrl";
 import { getJSON } from "./utils/http";
 
 export async function getAllCharacters(name?: string): Promise<Character[]> {
-  const baseURL = new URL(
-    import.meta.env.VITE_MARVEL_API_BASE_URL + "/characters"
-  );
+  const baseURL = new URL(ENDPOINTS.CHARACTERS);
 
   const urlSearchParams = new URLSearchParams([
     ["limit", 50],

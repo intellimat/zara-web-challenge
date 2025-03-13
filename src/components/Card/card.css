@@ -9,7 +9,7 @@
 }
 
 .box .character-img {
-  border-bottom: 2px red solid;
+  border-bottom: 2px var(--marvel-red) solid;
   width: 100%;
 }
 

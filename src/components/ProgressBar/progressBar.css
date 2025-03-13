@@ -1,0 +1,29 @@
+.progress-bar {
+  appearance: none;
+  width: 0;
+  opacity: 0;
+  height: 4px;
+  background-color: var(--marvel-red);
+  border: none;
+  margin: 0;
+  padding: 0;
+  animation: progressAnimation 6s ease-in-out forwards;
+}
+
+@keyframes progressAnimation {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    width: 100%;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+}
