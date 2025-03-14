@@ -1,16 +1,48 @@
-.banner-container {
+.banner {
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+.banner .banner-content {
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 24px;
-  background-color: black;
-  color: white;
-  padding-left: 200px;
-  padding-right: 200px;
+  max-width: 800px;
+  /* height: fit-content; */
 }
 
-.banner-container .information .header {
+.banner .banner-content .information {
+  margin-right: 24px;
+}
+
+.banner .banner-content .information .description {
+  margin: 8px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.banner .banner-content .information .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 24px;
+    margin: 8px 0;
+  }
+}
+
+@media (max-width: 460px) {
+  .banner-content {
+    flex-wrap: wrap;
+    .character-img {
+      width: 100%;
+      height: auto;
+    }
+  }
 }

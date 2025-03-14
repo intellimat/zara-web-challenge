@@ -26,7 +26,7 @@ const Character: React.FC = () => {
           imgUrl={buildImgUrl(character.thumbnail)}
           name={character.name}
           description={character.description}
-          Button={() => <HeartButton full={false} />}
+          Button={() => <HeartButton full={true} />}
         />
       )}
     </div>

@@ -7,12 +7,18 @@ interface Props {
 }
 
 const HeartButton: React.FC<Props> = ({ full, onClick }) => {
-  const heartIconUrl = full ? "icons/full_heart.svg" : "icons/empty_heart.svg";
+  const heartIconUrl = full
+    ? "/icons/full_heart.svg"
+    : "/icons/empty_heart.svg";
 
   return (
-    <button className="heart-button" onClick={onClick}>
-      <img src={heartIconUrl} height={18} width={20} alt="Heart icon" />
-    </button>
+    <img
+      role="button"
+      className="heart-button"
+      onClick={onClick}
+      src={heartIconUrl}
+      alt="Heart icon"
+    />
   );
 };
 
