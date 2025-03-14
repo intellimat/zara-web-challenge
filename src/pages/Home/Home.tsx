@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../../components/Card/Card";
-import "./home.css";
+import styles from "./home.module.css";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import { useQuery } from "@tanstack/react-query";
 import { getAllCharacters } from "../../services/characterService";
@@ -26,13 +26,13 @@ const Home: React.FC = () => {
   return (
     <>
       {isPending && <ProgessBar />}
-      <div className="main-container">
+      <div className={styles.mainContainer}>
         <Searchbar
           query={query}
           setQuery={setQuery}
           numberOfResults={characters?.length || 0}
         />
-        <div className="cards-container">
+        <div className={styles.cardsContainer}>
           {characters &&
             characters.map((character) => (
               <Card

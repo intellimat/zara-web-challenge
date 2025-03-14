@@ -1,5 +1,5 @@
 import React from "react";
-import "./searchbar.css";
+import styles from "./searchbar.module.css";
 
 interface Props {
   query: string;
@@ -13,18 +13,23 @@ const Searchbar: React.FC<Props> = ({ query, setQuery, numberOfResults }) => {
   };
 
   return (
-    <div className="searchbar">
-      <div className="input-wrapper">
-        <img src="icons/lens.svg" alt="search icon" />
+    <>
+      <div className={styles.inputWrapper}>
+        <img
+          className={styles.searchIcon}
+          src="icons/lens.svg"
+          alt="search icon"
+        />
         <input
           type="text"
+          className={styles.textInput}
           value={query}
           onChange={handleInputChange}
           placeholder="SEARCH A CHARACTER..."
         />
       </div>
-      <p className="number-of-results">{numberOfResults} RESULTS</p>
-    </div>
+      <p className={styles.numberOfResults}>{numberOfResults} RESULTS</p>
+    </>
   );
 };
 
