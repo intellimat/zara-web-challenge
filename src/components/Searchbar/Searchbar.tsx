@@ -1,23 +1,35 @@
-import React, { useState } from "react";
-import "./searchbar.css";
+import React from "react";
+import styles from "./searchbar.module.css";
 
-const Searchbar: React.FC = () => {
-  const [query, setQuery] = useState("");
+interface Props {
+  query: string;
+  setQuery: (query: string) => void;
+  numberOfResults: number;
+}
 
+const Searchbar: React.FC<Props> = ({ query, setQuery, numberOfResults }) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
   };
 
   return (
-    <div className="searchbar">
-      <img src="icons/lens.svg" alt="search icon" />
-      <input
-        type="text"
-        value={query}
-        onChange={handleInputChange}
-        placeholder="SEARCH A CHARACTER..."
-      />
-    </div>
+    <>
+      <div className={styles.inputWrapper}>
+        <img
+          className={styles.searchIcon}
+          src="icons/lens.svg"
+          alt="search icon"
+        />
+        <input
+          type="text"
+          className={styles.textInput}
+          value={query}
+          onChange={handleInputChange}
+          placeholder="SEARCH A CHARACTER..."
+        />
+      </div>
+      <p className={styles.numberOfResults}>{numberOfResults} RESULTS</p>
+    </>
   );
 };
 

@@ -1,0 +1,18 @@
+.navbar {
+  height: 84px;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+}
+
+.favouriteBtnContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
