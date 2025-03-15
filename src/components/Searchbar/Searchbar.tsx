@@ -13,7 +13,7 @@ const Searchbar: React.FC<Props> = ({ query, setQuery, numberOfResults }) => {
   };
 
   return (
-    <>
+    <div data-testid="searchbar">
       <div className={styles.inputWrapper}>
         <img
           className={styles.searchIcon}
@@ -29,7 +29,7 @@ const Searchbar: React.FC<Props> = ({ query, setQuery, numberOfResults }) => {
         />
       </div>
       <p className={styles.numberOfResults}>{numberOfResults} RESULTS</p>
-    </>
+    </div>
   );
 };
 
