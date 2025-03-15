@@ -27,7 +27,7 @@ const Card: React.FC<Props> = ({
   };
 
   return (
-    <div className="box">
+    <div className="box" data-testid="character-card">
       <Link to={"character/" + character.id}>
         <img
           className="character-img"
