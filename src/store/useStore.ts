@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { Character } from "../types/Character";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 
 type Store = {
   query: string;
@@ -11,24 +11,29 @@ type Store = {
 };
 
 const useStore = create<Store>()(
-  devtools((set) => ({
-    query: "",
-    setQuery: (query: string) =>
-      set(() => ({
-        query,
-      })),
-    favouriteCharacters: [],
-    addFavouriteCharacter: (newCharacter: Character) =>
-      set((state) => ({
-        favouriteCharacters: [...state.favouriteCharacters, newCharacter],
-      })),
-    removeFavouriteCharacter: (characterId: number) =>
-      set((state) => ({
-        favouriteCharacters: state.favouriteCharacters.filter(
-          (c) => c.id !== characterId
-        ),
-      })),
-  }))
+  devtools(
+    persist(
+      (set) => ({
+        query: "",
+        setQuery: (query: string) =>
+          set(() => ({
+            query,
+          })),
+        favouriteCharacters: [],
+        addFavouriteCharacter: (newCharacter: Character) =>
+          set((state) => ({
+            favouriteCharacters: [...state.favouriteCharacters, newCharacter],
+          })),
+        removeFavouriteCharacter: (characterId: number) =>
+          set((state) => ({
+            favouriteCharacters: state.favouriteCharacters.filter(
+              (c) => c.id !== characterId
+            ),
+          })),
+      }),
+      { name: "marvel-characters" }
+    )
+  )
 );
 
 export default useStore;
