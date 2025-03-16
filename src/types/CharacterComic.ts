@@ -17,7 +17,7 @@ export interface CharacterComic {
   resourceURI: string;
   urls: URL[];
   series: Series;
-  variants: any[];
+  variants: Variant[];
   collections: any[];
   collectedIssues: any[];
   dates: DateElement[];

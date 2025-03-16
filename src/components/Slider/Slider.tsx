@@ -1,12 +1,12 @@
 import React from "react";
-import "./slider.module.css";
+import styles from "./slider.module.css";
 
 interface Props {
-  items: React.JSX.Element[];
+  children: React.ReactNode;
 }
 
-const Slider: React.FC<Props> = () => {
-  return <></>;
+const Slider: React.FC<Props> = ({ children }) => {
+  return <div className={styles.slider}>{children}</div>;
 };
 
 export default Slider;

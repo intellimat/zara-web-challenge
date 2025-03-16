@@ -1,5 +1,5 @@
 import React from "react";
-import "./character.module.css";
+import styles from "./character.module.css";
 import Banner from "../../components/Banner/Banner";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -14,6 +14,7 @@ import buildImgUrl, {
 import { useParams } from "react-router";
 import HeartButton from "../../components/HeartButton/HeartButton";
 import ComicCard from "../../components/ComicCard/ComicCard";
+import Slider from "../../components/Slider/Slider";
 
 const Character: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,18 +28,17 @@ const Character: React.FC = () => {
   } = useStore();
 
   const { data: characterComics } = useQuery({
-    queryKey: ["characters/" + characterId + "/comics"],
+    queryKey: ["character", characterId],
     queryFn: () => {
-      if (characterId) return getCharacterComics(characterId);
+      if (characterId) return getCharacterComics(characterId!);
     },
+    enabled: !!characterId,
   });
 
   const { data: character } = useQuery({
     queryKey: ["characters", query],
     queryFn: () => getAllCharacters(query),
-    select: (data) =>
-      (characterId !== undefined && data.find((c) => c.id === characterId)) ||
-      undefined,
+    select: (data) => data.find((c) => c.id === characterId),
   });
 
   const isFavourite =
@@ -69,16 +69,18 @@ const Character: React.FC = () => {
               <HeartButton full={isFavourite} onClick={handleBtnClick} />
             )}
           />
-          <div>
+          <div className={styles.comicsContainer}>
             <h2>Comics</h2>
             <div>
-              {characterComics &&
-                characterComics.map((characterComic) => (
-                  <ComicCard
-                    key={characterComic.id}
-                    characterComic={characterComic}
-                  />
-                ))}
+              <Slider>
+                {characterComics &&
+                  characterComics.map((characterComic) => (
+                    <ComicCard
+                      key={characterComic.id}
+                      characterComic={characterComic}
+                    />
+                  ))}
+              </Slider>
             </div>
           </div>
         </>

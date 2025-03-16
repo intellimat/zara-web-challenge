@@ -1,0 +1,26 @@
+.slider {
+  display: flex;
+  gap: 24px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  /* Firefox scrollbar style */
+  /* scrollbar-width: 4px; */
+  /* scrollbar-color: var(--marvel-red) #d9d9d9; */
+}
+
+/* Edge, Safari and Chrom scrollbar style */
+/* .slider::-webkit-scrollbar {
+  overflow-x: auto;
+  width: 4px;
+}
+
+.slider::-webkit-scrollbar-track {
+  background: black;
+}
+::-webkit-scrollbar-button {
+}
+
+.slider::-webkit-scrollbar-thumb {
+  background-color: var(--marvel-red);
+} */

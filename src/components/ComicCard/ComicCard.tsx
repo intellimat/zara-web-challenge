@@ -17,13 +17,13 @@ const ComicCard: React.FC<Props> = ({ characterComic }) => {
         className={styles.comicImg}
         src={buildImgUrl(
           characterComic.thumbnail,
-          ThumbnailLayouts.portrait,
-          ThumbnailSizes.xlarge
+          ThumbnailLayouts.standard,
+          ThumbnailSizes.medium
         )}
         alt={characterComic.title}
       />
       <p className={styles.title}>{characterComic.title}</p>
-      <small className={styles.subTitle}> 1967</small>
+      <small className={styles.subTitle}>1967</small>
     </div>
   );
 };
