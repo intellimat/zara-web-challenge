@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import App from "../App";
 import { MemoryRouter } from "react-router";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "../query-client";
+import { queryClient } from "../query-client.ts";
 import characters from "./mock/characters.json";
 import * as services from "../services/characterService";
 
