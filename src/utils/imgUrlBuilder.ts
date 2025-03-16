@@ -1,25 +1,29 @@
 import { Thumbnail } from "../types/Character";
 
-const ThumbnailLayouts = {
-  portrait: "portrait",
-  standard: "standard",
-  landscape: "landscape",
-};
+export enum ThumbnailLayouts {
+  portrait = "portrait",
+  standard = "standard",
+  landscape = "landscape",
+}
 
-const ThumbnailSizes = {
-  small: "small",
-  medium: "medium",
-  large: "large",
-  xlarge: "xlarge",
-};
+export enum ThumbnailSizes {
+  small = "small",
+  medium = "medium",
+  large = "large",
+  xlarge = "xlarge",
+}
 
-export default function buildImgUrl(thumbnail: Thumbnail) {
+export default function buildImgUrl(
+  thumbnail: Thumbnail,
+  thumbnailLayout: ThumbnailLayouts,
+  thumbnailSizes: ThumbnailSizes
+) {
   return (
     thumbnail.path +
     "/" +
-    ThumbnailLayouts.standard +
+    thumbnailLayout +
     "_" +
-    ThumbnailSizes.xlarge +
+    thumbnailSizes +
     "." +
     thumbnail.extension
   );

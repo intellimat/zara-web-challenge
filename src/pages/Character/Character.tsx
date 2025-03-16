@@ -2,11 +2,18 @@ import React from "react";
 import "./character.module.css";
 import Banner from "../../components/Banner/Banner";
 import { useQuery } from "@tanstack/react-query";
-import { getAllCharacters } from "../../services/characterService";
+import {
+  getAllCharacters,
+  getCharacterComics,
+} from "../../services/characterService";
 import useStore from "../../store/useStore";
-import buildImgUrl from "../../utils/imgUrlBuilder";
+import buildImgUrl, {
+  ThumbnailLayouts,
+  ThumbnailSizes,
+} from "../../utils/imgUrlBuilder";
 import { useParams } from "react-router";
 import HeartButton from "../../components/HeartButton/HeartButton";
+import ComicCard from "../../components/ComicCard/ComicCard";
 
 const Character: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -18,6 +25,13 @@ const Character: React.FC = () => {
     addFavouriteCharacter,
     removeFavouriteCharacter,
   } = useStore();
+
+  const { data: characterComics } = useQuery({
+    queryKey: ["characters/" + characterId + "/comics"],
+    queryFn: () => {
+      if (characterId) return getCharacterComics(characterId);
+    },
+  });
 
   const { data: character } = useQuery({
     queryKey: ["characters", query],
@@ -44,7 +58,11 @@ const Character: React.FC = () => {
       {character && (
         <>
           <Banner
-            imgUrl={buildImgUrl(character.thumbnail)}
+            imgUrl={buildImgUrl(
+              character.thumbnail,
+              ThumbnailLayouts.standard,
+              ThumbnailSizes.xlarge
+            )}
             name={character.name}
             description={character.description}
             Button={() => (
@@ -53,6 +71,15 @@ const Character: React.FC = () => {
           />
           <div>
             <h2>Comics</h2>
+            <div>
+              {characterComics &&
+                characterComics.map((characterComic) => (
+                  <ComicCard
+                    key={characterComic.id}
+                    characterComic={characterComic}
+                  />
+                ))}
+            </div>
           </div>
         </>
       )}

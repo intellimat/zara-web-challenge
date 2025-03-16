@@ -1,7 +1,10 @@
 import React from "react";
-import "./card.css";
+import styles from "./card.module.css";
 import { Character } from "../../types/Character";
-import buildImgUrl from "../../utils/imgUrlBuilder";
+import buildImgUrl, {
+  ThumbnailLayouts,
+  ThumbnailSizes,
+} from "../../utils/imgUrlBuilder";
 import { Link } from "react-router";
 import HeartButton from "../HeartButton/HeartButton";
 
@@ -27,18 +30,22 @@ const Card: React.FC<Props> = ({
   };
 
   return (
-    <div className="box" data-testid="character-card">
+    <div className={styles.box} data-testid="character-card">
       <Link to={"character/" + character.id}>
         <img
-          className="character-img"
-          src={buildImgUrl(character.thumbnail)}
+          className={styles.characterImg}
+          src={buildImgUrl(
+            character.thumbnail,
+            ThumbnailLayouts.standard,
+            ThumbnailSizes.xlarge
+          )}
           alt={character.name + " thumbnail"}
           height={200}
         />
       </Link>
 
-      <div className="title-container">
-        <Link className="title" to={"character/" + character.id}>
+      <div className={styles.titleContainer}>
+        <Link className={styles.title} to={"character/" + character.id}>
           {character.name}
         </Link>
         <HeartButton onClick={handleBtnClick} full={isFavourite} />

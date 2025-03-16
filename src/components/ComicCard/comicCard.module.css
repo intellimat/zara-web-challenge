@@ -1,0 +1,22 @@
+.comicCard {
+  width: 150px;
+}
+
+.comicImg {
+  width: 100%;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 15.05px;
+  line-height: 100%;
+  letter-spacing: 0%;
+
+  word-wrap: break-word;
+  text-align: center;
+  margin: 0 12px;
+}
+
+.subTitle {
+  font-weight: 400;
+}

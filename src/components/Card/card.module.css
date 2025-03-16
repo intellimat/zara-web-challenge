@@ -8,12 +8,12 @@
   mask: var(--mask);
 }
 
-.box .character-img {
+.characterImg {
   border-bottom: 2px var(--marvel-red) solid;
   width: 100%;
 }
 
-.box .title {
+.title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -23,7 +23,7 @@
   text-transform: uppercase;
 }
 
-.box .title-container {
+.titleContainer {
   padding: 12px;
   display: flex;
   justify-content: space-between;
