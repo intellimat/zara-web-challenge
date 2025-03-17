@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import Card from "../../components/Card/Card";
+import React, { useCallback, useMemo } from "react";
+import Card from "../../components/CharacterCard/CharacterCard";
 import styles from "./home.module.css";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import useStore from "../../store/useStore";
@@ -16,13 +16,17 @@ const Home: React.FC = () => {
   } = useStore();
 
   const filterByQuery = useCallback(
-    (data: Character[]) => data?.filter((c) => c.name.includes(query)),
+    (data: Character[]) =>
+      data?.filter((c) => c.name.toUpperCase().includes(query.toUpperCase())),
     [query]
   );
 
   const { data: characters } = useCharacters<Character[]>(filterByQuery);
 
-  const favouriteCharactersIDs = favouriteCharacters.map((c) => c.id);
+  const favouriteCharacterIds = useMemo(
+    () => new Set(favouriteCharacters.map((fav) => fav.id)),
+    [favouriteCharacters]
+  );
 
   return (
     <>
@@ -37,7 +41,7 @@ const Home: React.FC = () => {
             <Card
               key={character.id}
               character={character}
-              isFavourite={favouriteCharactersIDs.includes(character.id)}
+              isFavourite={favouriteCharacterIds.has(character.id)}
               addFavouriteCharacter={addFavouriteCharacter}
               removeFavouriteCharacter={removeFavouriteCharacter}
             />

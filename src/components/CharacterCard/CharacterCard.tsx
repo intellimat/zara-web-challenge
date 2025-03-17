@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./card.module.css";
+import React, { useCallback } from "react";
+import styles from "./characterCard.module.css";
 import { Character } from "../../types/Character";
 import buildImgUrl, {
   ThumbnailLayouts,
@@ -21,13 +21,13 @@ const Card: React.FC<Props> = ({
   addFavouriteCharacter,
   removeFavouriteCharacter,
 }) => {
-  const handleBtnClick = () => {
-    if (!isFavourite) {
-      addFavouriteCharacter(character);
-    } else {
+  const toggleFavourite = useCallback(() => {
+    if (isFavourite) {
       removeFavouriteCharacter(character.id);
+    } else {
+      addFavouriteCharacter(character);
     }
-  };
+  }, [isFavourite, character, addFavouriteCharacter, removeFavouriteCharacter]);
 
   return (
     <div className={styles.box} data-testid="character-card">
@@ -41,6 +41,7 @@ const Card: React.FC<Props> = ({
           )}
           alt={character.name + " thumbnail"}
           height={200}
+          loading="lazy"
         />
       </Link>
 
@@ -48,7 +49,7 @@ const Card: React.FC<Props> = ({
         <Link className={styles.title} to={"character/" + character.id}>
           {character.name}
         </Link>
-        <HeartButton onClick={handleBtnClick} full={isFavourite} />
+        <HeartButton onClick={toggleFavourite} full={isFavourite} />
       </div>
     </div>
   );

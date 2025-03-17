@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import styles from "./favouriteCharacter.module.css";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import useStore from "../../store/useStore";
-import Card from "../../components/Card/Card";
+import Card from "../../components/CharacterCard/CharacterCard";
 
 const FavouriteCharacters: React.FC = () => {
   const [query, setQuery] = useState<string>("");

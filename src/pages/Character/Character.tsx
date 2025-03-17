@@ -37,13 +37,21 @@ const Character: React.FC = () => {
     characterId !== null &&
     favouriteCharacters.some((c) => c.id === characterId);
 
-  const toggleFavourite = () => {
-    if (isFavourite && characterId) {
+  const toggleFavourite = useCallback(() => {
+    if (characterId === null || !character) return;
+
+    if (isFavourite) {
       removeFavouriteCharacter(characterId);
-    } else if (character !== undefined) {
+    } else {
       addFavouriteCharacter(character);
     }
-  };
+  }, [
+    isFavourite,
+    characterId,
+    character,
+    addFavouriteCharacter,
+    removeFavouriteCharacter,
+  ]);
 
   return (
     <>
