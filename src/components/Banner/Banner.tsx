@@ -1,4 +1,4 @@
-import "./banner.css";
+import styles from "./banner.module.css";
 
 interface Props {
   imgUrl: string;
@@ -9,15 +9,13 @@ interface Props {
 
 const Banner: React.FC<Props> = ({ imgUrl, name, description, Button }) => {
   return (
-    <div className="banner">
-      <div className="banner-content">
-        <img className="character-img" src={imgUrl} alt={name} />
-        <div className="information">
-          <div className="header">
-            <h1>{name}</h1> {Button && <Button />}
-          </div>
-          <p className="description">{description}</p>
+    <div className={styles.banner}>
+      <img className={styles.characterImg} src={imgUrl} alt={name} />
+      <div className={styles.information}>
+        <div className={styles.header}>
+          <h1>{name}</h1> {Button && <Button />}
         </div>
+        <p className={styles.description}>{description}</p>
       </div>
     </div>
   );

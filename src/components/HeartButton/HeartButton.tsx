@@ -1,5 +1,5 @@
 import React from "react";
-import "./heartButton.css";
+import styles from "./heartButton.module.css";
 
 interface Props {
   full: boolean;
@@ -14,7 +14,7 @@ const HeartButton: React.FC<Props> = ({ full, onClick }) => {
   return (
     <img
       role="button"
-      className="heart-button"
+      className={styles.heartButton}
       onClick={onClick}
       src={heartIconUrl}
       alt="Heart icon"

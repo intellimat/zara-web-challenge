@@ -5,7 +5,6 @@ import Searchbar from "../../components/Searchbar/Searchbar";
 import { useQuery } from "@tanstack/react-query";
 import { getAllCharacters } from "../../services/characterService";
 import useStore from "../../store/useStore";
-import ProgessBar from "../../components/ProgressBar/ProgressBar";
 
 const Home: React.FC = () => {
   const {
@@ -16,7 +15,7 @@ const Home: React.FC = () => {
     setQuery,
   } = useStore();
 
-  const { data: characters, isPending } = useQuery({
+  const { data: characters } = useQuery({
     queryKey: ["characters", query],
     queryFn: () => getAllCharacters(query),
   });
@@ -25,7 +24,6 @@ const Home: React.FC = () => {
 
   return (
     <>
-      {isPending && <ProgessBar />}
       <div className={styles.mainContainer}>
         <Searchbar
           query={query}

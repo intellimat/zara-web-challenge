@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
   const { favouriteCharacters } = useStore();
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={styles.navbar} data-testid="navbar">
       <Link to={"/"}>
         <img src="Marvel_logo.svg" alt="Marvel Logo" />
       </Link>
