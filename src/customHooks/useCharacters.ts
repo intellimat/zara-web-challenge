@@ -1,19 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllCharacters } from "../services/characterService";
-import { useMemo } from "react";
+import { Character } from "../types/Character";
 
-export const useCharacters = (query: string) => {
-  const { data: characters } = useQuery({
+export const useCharacters = <T>(select?: (data: Character[]) => T) => {
+  return useQuery({
     queryKey: ["characters"],
     queryFn: () => getAllCharacters(),
+    select,
   });
-
-  const filteredCharacters = useMemo(
-    () => characters?.filter((c) => c.name.includes(query)),
-    [characters, query]
-  );
-
-  return {
-    filteredCharacters,
-  };
 };

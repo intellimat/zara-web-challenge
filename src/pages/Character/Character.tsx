@@ -1,11 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styles from "./character.module.css";
 import Banner from "../../components/Banner/Banner";
-import { useQuery } from "@tanstack/react-query";
-import {
-  getAllCharacters,
-  getCharacterComics,
-} from "../../services/characterService";
 import useStore from "../../store/useStore";
 import buildImgUrl, {
   ThumbnailLayouts,
@@ -15,38 +10,35 @@ import { useParams } from "react-router";
 import HeartButton from "../../components/HeartButton/HeartButton";
 import ComicCard from "../../components/ComicCard/ComicCard";
 import Slider from "../../components/Slider/Slider";
-
+import { useCharacterComics } from "../../customHooks/useCharacterComics";
+import { useCharacters } from "../../customHooks/useCharacters";
+import { Character as CharacterType } from "../../types/Character";
 const Character: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const characterId = (id !== undefined && parseInt(id)) || undefined;
+  const characterId = id ? parseInt(id) : null;
 
   const {
-    query,
     favouriteCharacters,
     addFavouriteCharacter,
     removeFavouriteCharacter,
   } = useStore();
 
-  const { data: characterComics } = useQuery({
-    queryKey: ["character", characterId],
-    queryFn: () => {
-      if (characterId) return getCharacterComics(characterId!);
-    },
-    enabled: !!characterId,
-  });
-
-  const { data: character } = useQuery({
-    queryKey: ["characters", query],
-    queryFn: () => getAllCharacters(query),
-    select: (data) => data.find((c) => c.id === characterId),
-  });
+  const { data: characterComics } = useCharacterComics(characterId);
+  const characterSelector = useCallback(
+    (data: CharacterType[]) =>
+      data.find((c: CharacterType) => c.id === characterId),
+    [characterId]
+  );
+  const { data: character } = useCharacters<CharacterType | undefined>(
+    characterSelector
+  );
 
   const isFavourite =
-    characterId !== undefined &&
-    favouriteCharacters.map((c) => c.id).includes(characterId);
+    characterId !== null &&
+    favouriteCharacters.some((c) => c.id === characterId);
 
-  const handleBtnClick = () => {
-    if (isFavourite) {
+  const toggleFavourite = () => {
+    if (isFavourite && characterId) {
       removeFavouriteCharacter(characterId);
     } else if (character !== undefined) {
       addFavouriteCharacter(character);
@@ -66,7 +58,7 @@ const Character: React.FC = () => {
             name={character.name}
             description={character.description}
             Button={() => (
-              <HeartButton full={isFavourite} onClick={handleBtnClick} />
+              <HeartButton full={isFavourite} onClick={toggleFavourite} />
             )}
           />
           <div className={styles.comicsContainer}>
