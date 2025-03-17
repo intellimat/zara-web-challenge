@@ -70,9 +70,9 @@ const Character: React.FC = () => {
             )}
           />
           <div className={styles.comicsContainer}>
-            <h2>Comics</h2>
+            <h2 className={styles.comicsTitle}>Comics</h2>
             <div>
-              <Slider>
+              <Slider className={styles.slider}>
                 {characterComics &&
                   characterComics.map((characterComic) => (
                     <ComicCard

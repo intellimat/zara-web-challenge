@@ -10,14 +10,12 @@ interface Props {
 const Banner: React.FC<Props> = ({ imgUrl, name, description, Button }) => {
   return (
     <div className={styles.banner}>
-      <div className={styles.bannerContent}>
-        <img className={styles.characterImg} src={imgUrl} alt={name} />
-        <div className={styles.information}>
-          <div className={styles.header}>
-            <h1>{name}</h1> {Button && <Button />}
-          </div>
-          <p className={styles.description}>{description}</p>
+      <img className={styles.characterImg} src={imgUrl} alt={name} />
+      <div className={styles.information}>
+        <div className={styles.header}>
+          <h1>{name}</h1> {Button && <Button />}
         </div>
+        <p className={styles.description}>{description}</p>
       </div>
     </div>
   );

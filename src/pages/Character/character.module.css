@@ -1,3 +1,15 @@
 .comicsContainer {
   margin: 48px;
 }
+
+.slider {
+  display: flex;
+  gap: 24px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 18px;
+}
+
+.comicsTitle {
+  text-transform: uppercase;
+}

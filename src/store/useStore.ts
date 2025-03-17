@@ -16,22 +16,35 @@ const useStore = create<Store>()(
       (set) => ({
         query: "",
         setQuery: (query: string) =>
-          set(() => ({
-            query,
-          })),
+          set(
+            (state) => ({
+              ...state,
+              query,
+            }),
+            false,
+            "setQuery"
+          ),
         favouriteCharacters: [],
         addFavouriteCharacter: (newCharacter: Character) =>
-          set((state) => ({
-            favouriteCharacters: [...state.favouriteCharacters, newCharacter],
-          })),
+          set(
+            (state) => ({
+              favouriteCharacters: [...state.favouriteCharacters, newCharacter],
+            }),
+            false,
+            "addFavouriteCharacter"
+          ),
         removeFavouriteCharacter: (characterId: number) =>
-          set((state) => ({
-            favouriteCharacters: state.favouriteCharacters.filter(
-              (c) => c.id !== characterId
-            ),
-          })),
+          set(
+            (state) => ({
+              favouriteCharacters: state.favouriteCharacters.filter(
+                (c) => c.id !== characterId
+              ),
+            }),
+            false,
+            "removeFavouriteCharacter"
+          ),
       }),
-      { name: "marvel-characters" }
+      { name: "marvelCharacters" }
     )
   )
 );

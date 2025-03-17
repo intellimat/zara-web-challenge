@@ -2,6 +2,7 @@
   background-color: black;
   color: white;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   --mask: linear-gradient(-45deg, #0000 11.31px, #000 0);
   -webkit-mask: var(--mask);
@@ -30,21 +31,28 @@ h1 {
 }
 
 @media (min-width: 460px) {
-  .bannerContent {
-    display: flex;
-    flex-wrap: nowrap;
+  .banner {
     flex-direction: row;
-    justify-content: center;
-    gap: 24px;
-    max-width: 800px;
+  }
+
+  .characterImg {
+    width: auto;
+    height: auto;
   }
 
   .description {
-    margin: 8px 0;
+    margin-top: 8px;
+    margin-bottom: 0;
     display: -webkit-box;
     -webkit-line-clamp: 6;
     line-clamp: 6;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .information {
+    min-width: 250px;
+    max-width: 400px;
+    max-height: 200px;
   }
 }
