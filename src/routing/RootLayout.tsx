@@ -6,10 +6,13 @@ import ProgressBar from "../components/ProgressBar/ProgressBar";
 export default function RootLayout() {
   const isFetching = useIsFetching();
   return (
-    <>
+    <div>
       <Navbar />
       {isFetching > 0 && <ProgressBar />}
       <Outlet />
-    </>
+      <a className="MarvelAttribution" href="https://marvel.com">
+        Data provided by Marvel. © 2025 MARVEL
+      </a>
+    </div>
   );
 }

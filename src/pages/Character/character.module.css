@@ -13,3 +13,7 @@
 .comicsTitle {
   text-transform: uppercase;
 }
+
+.emptyComics {
+  padding-left: 12px;
+}
