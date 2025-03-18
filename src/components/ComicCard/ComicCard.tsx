@@ -24,7 +24,9 @@ const ComicCard: React.FC<Props> = ({ characterComic }) => {
         loading="lazy"
       />
       <p className={styles.title}>{characterComic.title}</p>
-      <small className={styles.subTitle}>1967</small>
+      <small className={styles.subTitle}>
+        {new Date(characterComic.dates[0].date).getFullYear()}
+      </small>
     </div>
   );
 };
