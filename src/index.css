@@ -8,6 +8,15 @@
   --marvel-red: #ec1d24;
 }
 
+.MarvelAttribution {
+  display: block;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  margin: 12px;
+}
+
 body {
   margin: 0;
 }

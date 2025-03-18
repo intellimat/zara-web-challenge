@@ -25,7 +25,7 @@ const Character: React.FC = () => {
     removeFavouriteCharacter,
   } = useStore();
 
-  const { data: characterComics } = useCharacterComics(characterId);
+  const { data: characterComics, isPending } = useCharacterComics(characterId);
 
   const sortedCharacterComics = useMemo(() => {
     if (!characterComics) return [];
@@ -72,26 +72,33 @@ const Character: React.FC = () => {
               ThumbnailSizes.xlarge
             )}
             name={character.name}
-            description={character.description}
+            description={
+              character.description.length > 0
+                ? character.description
+                : "No description available. "
+            }
             Button={() => (
               <HeartButton full={isFavourite} onClick={toggleFavourite} />
             )}
           />
-          {sortedCharacterComics && (
-            <div className={styles.comicsContainer}>
-              <h2 className={styles.comicsTitle}>Comics</h2>
-              <div>
-                <Slider className={styles.slider}>
-                  {sortedCharacterComics.map((characterComic) => (
-                    <ComicCard
-                      key={characterComic.id}
-                      characterComic={characterComic}
-                    />
-                  ))}
-                </Slider>
+          {!isPending &&
+            (sortedCharacterComics.length > 0 ? (
+              <div className={styles.comicsContainer}>
+                <h2 className={styles.comicsTitle}>Comics</h2>
+                <div>
+                  <Slider className={styles.slider}>
+                    {sortedCharacterComics.map((characterComic) => (
+                      <ComicCard
+                        key={characterComic.id}
+                        characterComic={characterComic}
+                      />
+                    ))}
+                  </Slider>
+                </div>
               </div>
-            </div>
-          )}
+            ) : (
+              <p className={styles.emptyComics}>No comics available. </p>
+            ))}
         </>
       )}
     </>
