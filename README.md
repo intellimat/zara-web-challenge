@@ -6,7 +6,8 @@ React app that shows Marvel characters.
 
 
 ## Requirements
-- node.js ^22.14
+- node.js >= 22.14
+- npm >= 10.9.2
 
 ## Installation
 Clone the repo
@@ -22,15 +23,14 @@ and run
 `npm install`
 ## Configure API keys in _.env_
 You need your personal Marvel API keys to run the project. 
-You can get them from _https://developer.marvel.com_
+You can get them from [Marvel Developer Portal](https://developer.marvel.com)
 
 In your _.env_ file set your private key, public key and timestamp
-
-`VITE_MARVEL_API_PRIVATE_KEY`
-
-`VITE_MARVEL_API_PUBLIC_KEY`
-
-`VITE_MARVEL_API_TIMESTAMP`
+```
+VITE_MARVEL_API_PRIVATE_KEY=your_private_key
+VITE_MARVEL_API_PUBLIC_KEY=your_public_key
+VITE_MARVEL_API_TIMESTAMP=your_statically_generated_timestamp
+```
 
 ## Run the project
 In __develop__ mode
@@ -178,12 +178,12 @@ Pure components (do not handle any logic, they just display information):
 - HeartButton
 - ComicCard
 
-Other components has a little bit of logic to simplify functionality implementation:
+Other components have a little bit of logic to simplify functionality implementation:
 - CharacterCard
 - Navbar
 
 ## Styling
-Not much emphasis has been put on styling and maintaining a clean styling patter due to the limited implementation time.
+Not much emphasis has been put on styling and maintaining a clean styling pattern due to the limited implementation time.
 
 No design system is implemented.
 
