@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./slider.module.css";
 
 interface Props {
   children: React.ReactNode;
