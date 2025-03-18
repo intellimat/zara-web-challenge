@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import styles from "./character.module.css";
 import Banner from "../../components/Banner/Banner";
 import useStore from "../../store/useStore";
@@ -13,6 +13,8 @@ import Slider from "../../components/Slider/Slider";
 import { useCharacterComics } from "../../customHooks/useCharacterComics";
 import { useCharacters } from "../../customHooks/useCharacters";
 import { Character as CharacterType } from "../../types/Character";
+import sortCharacterComics from "../../utils/sortComics";
+
 const Character: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const characterId = id ? parseInt(id) : null;
@@ -24,6 +26,12 @@ const Character: React.FC = () => {
   } = useStore();
 
   const { data: characterComics } = useCharacterComics(characterId);
+
+  const sortedCharacterComics = useMemo(() => {
+    if (!characterComics) return [];
+    return sortCharacterComics(characterComics);
+  }, [characterComics]);
+
   const characterSelector = useCallback(
     (data: CharacterType[]) =>
       data.find((c: CharacterType) => c.id === characterId),
@@ -69,20 +77,21 @@ const Character: React.FC = () => {
               <HeartButton full={isFavourite} onClick={toggleFavourite} />
             )}
           />
-          <div className={styles.comicsContainer}>
-            <h2 className={styles.comicsTitle}>Comics</h2>
-            <div>
-              <Slider className={styles.slider}>
-                {characterComics &&
-                  characterComics.map((characterComic) => (
+          {sortedCharacterComics && (
+            <div className={styles.comicsContainer}>
+              <h2 className={styles.comicsTitle}>Comics</h2>
+              <div>
+                <Slider className={styles.slider}>
+                  {sortedCharacterComics.map((characterComic) => (
                     <ComicCard
                       key={characterComic.id}
                       characterComic={characterComic}
                     />
                   ))}
-              </Slider>
+                </Slider>
+              </div>
             </div>
-          </div>
+          )}
         </>
       )}
     </>
