@@ -12,7 +12,7 @@ interface Props {
 
 const ComicCard: React.FC<Props> = ({ characterComic }) => {
   return (
-    <div className={styles.comicCard}>
+    <div className={styles.comicCard} data-testid="comicCard">
       <img
         className={styles.comicImg}
         src={buildImgUrl(
