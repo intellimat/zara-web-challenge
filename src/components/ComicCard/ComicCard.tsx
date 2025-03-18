@@ -21,6 +21,7 @@ const ComicCard: React.FC<Props> = ({ characterComic }) => {
           ThumbnailSizes.medium
         )}
         alt={characterComic.title}
+        loading="lazy"
       />
       <p className={styles.title}>{characterComic.title}</p>
       <small className={styles.subTitle}>1967</small>

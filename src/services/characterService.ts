@@ -3,14 +3,10 @@ import { API_BASE_URL, ENDPOINTS } from "./endpoints";
 import { GetCharacterComicsResponse, GetCharactersResponse } from "./types";
 import { getJSONwithAuth } from "./utils/http";
 
-export async function getAllCharacters(name?: string): Promise<Character[]> {
+export async function getAllCharacters(): Promise<Character[]> {
   const url = new URL(API_BASE_URL + ENDPOINTS.CHARACTERS);
 
   url.searchParams.append("limit", "50");
-
-  if (name && name.length > 0) {
-    url.searchParams.append("name", name);
-  }
 
   const characters = await getJSONwithAuth<GetCharactersResponse>(url);
   return characters.data.results;

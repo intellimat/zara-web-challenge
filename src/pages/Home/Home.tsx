@@ -1,10 +1,10 @@
-import React from "react";
-import Card from "../../components/Card/Card";
+import React, { useCallback, useMemo } from "react";
+import Card from "../../components/CharacterCard/CharacterCard";
 import styles from "./home.module.css";
 import Searchbar from "../../components/Searchbar/Searchbar";
-import { useQuery } from "@tanstack/react-query";
-import { getAllCharacters } from "../../services/characterService";
 import useStore from "../../store/useStore";
+import { useCharacters } from "../../customHooks/useCharacters";
+import { Character } from "../../types/Character";
 
 const Home: React.FC = () => {
   const {
@@ -15,12 +15,18 @@ const Home: React.FC = () => {
     setQuery,
   } = useStore();
 
-  const { data: characters } = useQuery({
-    queryKey: ["characters", query],
-    queryFn: () => getAllCharacters(query),
-  });
+  const filterByQuery = useCallback(
+    (data: Character[]) =>
+      data?.filter((c) => c.name.toUpperCase().includes(query.toUpperCase())),
+    [query]
+  );
 
-  const favouriteCharactersIDs = favouriteCharacters.map((c) => c.id);
+  const { data: characters } = useCharacters<Character[]>(filterByQuery);
+
+  const favouriteCharacterIds = useMemo(
+    () => new Set(favouriteCharacters.map((fav) => fav.id)),
+    [favouriteCharacters]
+  );
 
   return (
     <>
@@ -31,16 +37,15 @@ const Home: React.FC = () => {
           numberOfResults={characters?.length || 0}
         />
         <div className={styles.cardsContainer}>
-          {characters &&
-            characters.map((character) => (
-              <Card
-                key={character.id}
-                character={character}
-                isFavourite={favouriteCharactersIDs.includes(character.id)}
-                addFavouriteCharacter={addFavouriteCharacter}
-                removeFavouriteCharacter={removeFavouriteCharacter}
-              />
-            ))}
+          {characters?.map((character) => (
+            <Card
+              key={character.id}
+              character={character}
+              isFavourite={favouriteCharacterIds.has(character.id)}
+              addFavouriteCharacter={addFavouriteCharacter}
+              removeFavouriteCharacter={removeFavouriteCharacter}
+            />
+          ))}
         </div>
       </div>
     </>
