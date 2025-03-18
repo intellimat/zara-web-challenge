@@ -6,6 +6,7 @@ React app that shows Marvel characters.
 
 - node.js >= 22.14
 - npm >= 10.9.2
+- latest Google Chrome Browser
 
 ## Installation
 
@@ -25,6 +26,7 @@ and run
 
 You need your personal Marvel API keys to run the project.
 You can get them from [Marvel Developer Portal](https://developer.marvel.com)
+Also, make sure _localhost_ is listed in the allowed domains to make calls to the Marvel API in your Marvel account.
 
 In your _.env_ file set your private key, public key and timestamp
 
@@ -186,7 +188,9 @@ Custom hooks were implemented to separate concerns between components and servic
 ### Custom Hooks
 
 - useCharacterComics.ts => retrieve the character comics (limit by 20)
-- useCharacters.ts => retrieve the characters (limit by 50) and take _select_ parameter to process the API reponse
+- useCharacters.ts => retrieve the characters (limit by 50)
+
+Notice useCharacter() takes _select_ parameter to process the API reponse
 
 As you can see in Character.tsx, the _characterSelector_ function is passed to _useCharacters_ hook as the select function so that we can filter by characterId and display the current character. In Home.tsx the select function is _filterByQuery_ instead, so that we can reactively display the characters based on what the user types into the search bar The useCallback React hook has been used to avoid unnecessary re-rendering of the above functions.
 
@@ -208,7 +212,7 @@ type Store = {
 
 Check _useStore.ts_ to see the store implementation.
 
-Side note: the store is saved into local storage, so that if you close and open the browser you still see the favourite characters.
+Note: the store is saved into local storage, so that if you close and open the browser you still see the favourite characters.
 
 ## Components
 
