@@ -20,9 +20,9 @@ const Character: React.FC = () => {
   const characterId = id ? parseInt(id) : null;
 
   const {
-    favouriteCharacters,
-    addFavouriteCharacter,
-    removeFavouriteCharacter,
+    favouriteCharactersIds,
+    addFavouriteCharacterId,
+    removeFavouriteCharacterId,
   } = useStore();
 
   const { data: characterComics, isPending } = useCharacterComics(characterId);
@@ -42,23 +42,22 @@ const Character: React.FC = () => {
   );
 
   const isFavourite =
-    characterId !== null &&
-    favouriteCharacters.some((c) => c.id === characterId);
+    characterId !== null && favouriteCharactersIds.includes(characterId);
 
   const toggleFavourite = useCallback(() => {
     if (characterId === null || !character) return;
 
     if (isFavourite) {
-      removeFavouriteCharacter(characterId);
+      removeFavouriteCharacterId(characterId);
     } else {
-      addFavouriteCharacter(character);
+      addFavouriteCharacterId(characterId);
     }
   }, [
     isFavourite,
     characterId,
     character,
-    addFavouriteCharacter,
-    removeFavouriteCharacter,
+    addFavouriteCharacterId,
+    removeFavouriteCharacterId,
   ]);
 
   return (
@@ -78,7 +77,11 @@ const Character: React.FC = () => {
                 : "No description available. "
             }
             Button={() => (
-              <HeartButton full={isFavourite} onClick={toggleFavourite} />
+              <HeartButton
+                full={isFavourite}
+                hovering={false}
+                onClick={toggleFavourite}
+              />
             )}
           />
           {!isPending &&

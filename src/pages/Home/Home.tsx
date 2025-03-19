@@ -1,16 +1,23 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Card from "../../components/CharacterCard/CharacterCard";
 import styles from "./home.module.css";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import useStore from "../../store/useStore";
 import { useCharacters } from "../../customHooks/useCharacters";
 import { Character } from "../../types/Character";
+import { HomeView } from "./homeViewEnum";
+import { useSearchParams } from "react-router";
 
 const Home: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const [activeView, setActiveView] = useState<HomeView>(
+    HomeView.allCharacters
+  );
+
   const {
-    addFavouriteCharacter,
-    removeFavouriteCharacter,
-    favouriteCharacters,
+    addFavouriteCharacterId,
+    removeFavouriteCharacterId,
+    favouriteCharactersIds,
     query,
     setQuery,
   } = useStore();
@@ -21,12 +28,27 @@ const Home: React.FC = () => {
     [query]
   );
 
-  const { data: characters } = useCharacters<Character[]>(filterByQuery);
+  const { data: filteredByQueryCharacters } =
+    useCharacters<Character[]>(filterByQuery);
 
-  const favouriteCharacterIds = useMemo(
-    () => new Set(favouriteCharacters.map((fav) => fav.id)),
-    [favouriteCharacters]
-  );
+  useEffect(() => {
+    const view = searchParams.get("view");
+    if (view === HomeView.favouriteCharacters) {
+      setActiveView(HomeView.favouriteCharacters);
+    } else {
+      setActiveView(HomeView.allCharacters);
+    }
+  }, [searchParams]);
+
+  const shownCharacters = useMemo(() => {
+    if (activeView === HomeView.favouriteCharacters) {
+      return filteredByQueryCharacters?.filter((c) =>
+        favouriteCharactersIds.includes(c.id)
+      );
+    } else {
+      return filteredByQueryCharacters;
+    }
+  }, [favouriteCharactersIds, filteredByQueryCharacters, activeView]);
 
   return (
     <>
@@ -34,16 +56,16 @@ const Home: React.FC = () => {
         <Searchbar
           query={query}
           setQuery={setQuery}
-          numberOfResults={characters?.length || 0}
+          numberOfResults={shownCharacters?.length || 0}
         />
         <div className={styles.cardsContainer}>
-          {characters?.map((character) => (
+          {shownCharacters?.map((character) => (
             <Card
               key={character.id}
               character={character}
-              isFavourite={favouriteCharacterIds.has(character.id)}
-              addFavouriteCharacter={addFavouriteCharacter}
-              removeFavouriteCharacter={removeFavouriteCharacter}
+              isFavourite={favouriteCharactersIds.includes(character.id)}
+              addFavouriteCharacterId={addFavouriteCharacterId}
+              removeFavouriteCharacterId={removeFavouriteCharacterId}
             />
           ))}
         </div>
