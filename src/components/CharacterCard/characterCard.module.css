@@ -2,8 +2,8 @@
   position: relative;
   overflow: hidden; /* Ensures the animation stays within the card */
 
-  color: white;
-  background-color: black;
+  color: var(--marvel-white);
+  background-color: var(--marvel-black);
   /* width: 200px; */
   height: 270px;
   --mask: linear-gradient(-45deg, #0000 11.31px, #000 0);
@@ -30,7 +30,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-decoration: none;
-  color: white;
+  color: var(--marvel-white);
   margin: auto initial;
   text-transform: uppercase;
 }
@@ -59,7 +59,6 @@
 }
 
 .box * {
-  /* color: white; */
   position: relative;
   z-index: 1;
 }

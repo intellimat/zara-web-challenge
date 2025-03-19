@@ -6,11 +6,14 @@
 
   /* Colors */
   --marvel-red: #ec1d24;
+  --marvel-black: #000000;
+  --marvel-white: #ffffff;
+  --marvel-grey: #aaaaaa;
 }
 
 .MarvelAttribution {
   display: block;
-  color: black;
+  color: var(--marvel-black);
   text-decoration: none;
   text-align: center;
   font-weight: bold;

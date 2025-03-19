@@ -2,12 +2,13 @@
   display: flex;
   justify-content: left;
   align-items: center;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid var(--marvel-black);
   padding-bottom: 8px;
 }
 
 .searchIcon {
   margin-right: 6px;
+  transform: scale(1.2);
 }
 
 .textInput {
