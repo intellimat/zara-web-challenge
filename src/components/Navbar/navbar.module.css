@@ -1,7 +1,7 @@
 .navbar {
   height: 84px;
-  background-color: black;
-  color: white;
+  background-color: var(--marvel-black);
+  color: var(--marvel-white);
   font-size: 16px;
   margin: 0;
   display: flex;

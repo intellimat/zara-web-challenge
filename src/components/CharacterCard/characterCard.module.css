@@ -1,6 +1,9 @@
 .box {
-  color: white;
-  background-color: black;
+  position: relative;
+  overflow: hidden; /* Ensures the animation stays within the card */
+
+  color: var(--marvel-white);
+  background-color: var(--marvel-black);
   /* width: 200px; */
   height: 270px;
   --mask: linear-gradient(-45deg, #0000 11.31px, #000 0);
@@ -9,8 +12,17 @@
 }
 
 .characterImg {
-  border-bottom: 2px var(--marvel-red) solid;
   width: 100%;
+}
+
+.imgLink {
+  text-decoration: none;
+  color: inherit;
+  background: var(--marvel-red);
+  border-bottom: 1px solid var(--marvel-red);
+  outline: none;
+  padding: 0;
+  margin: 0;
 }
 
 .title {
@@ -18,7 +30,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-decoration: none;
-  color: white;
+  color: var(--marvel-white);
   margin: auto initial;
   text-transform: uppercase;
 }
@@ -28,4 +40,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  top: 200px; /* Starts after the image */
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: var(--marvel-red);
+  transition: height 0.5s ease-in-out;
+  z-index: 0;
+}
+
+.box:hover::before {
+  height: calc(100% - 200px); /* Covers only below the image */
+}
+
+.box * {
+  position: relative;
+  z-index: 1;
 }

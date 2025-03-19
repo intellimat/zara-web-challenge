@@ -1,6 +1,6 @@
 .banner {
-  background-color: black;
-  color: white;
+  background-color: var(--marvel-black);
+  color: var(--marvel-white);
   display: flex;
   flex-direction: column;
   justify-content: center;

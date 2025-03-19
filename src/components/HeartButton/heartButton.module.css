@@ -1,4 +1,8 @@
-.heartButton {
-  width: 22px;
-  cursor: pointer;
+.fullHeartIcon path {
+  fill: var(--fill-color, var(--marvel-red)); /* Default to marvel-red */
+  transition: fill 0.5s linear;
+}
+
+.heartIcon {
+  transform: scale(1.5); /* Scales the icon 1.5 times its original size */
 }

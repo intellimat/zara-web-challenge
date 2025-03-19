@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./searchbar.module.css";
+import SearchIcon from "../../icons/lens.svg?react";
 
 interface Props {
   query: string;
@@ -15,11 +16,7 @@ const Searchbar: React.FC<Props> = ({ query, setQuery, numberOfResults }) => {
   return (
     <div data-testid="searchbar">
       <div className={styles.inputWrapper}>
-        <img
-          className={styles.searchIcon}
-          src="icons/lens.svg"
-          alt="search icon"
-        />
+        <SearchIcon className={styles.searchIcon} title="Search icon" />
         <input
           type="text"
           className={styles.textInput}
