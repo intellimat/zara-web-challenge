@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import styles from "./characterCard.module.css";
 import { Character } from "../../types/Character";
 import buildImgUrl, {
@@ -21,6 +21,8 @@ const Card: React.FC<Props> = ({
   addFavouriteCharacter,
   removeFavouriteCharacter,
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   const toggleFavourite = useCallback(() => {
     if (isFavourite) {
       removeFavouriteCharacter(character.id);
@@ -30,8 +32,14 @@ const Card: React.FC<Props> = ({
   }, [isFavourite, character, addFavouriteCharacter, removeFavouriteCharacter]);
 
   return (
-    <div className={styles.box} data-testid="character-card">
-      <Link to={"character/" + character.id}>
+    <div
+      className={styles.box}
+      // className={`${styles.box} ${isHovered ? styles.hovering : ""}`}
+      data-testid="character-card"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Link to={"character/" + character.id} className={styles.imgLink}>
         <img
           className={styles.characterImg}
           src={buildImgUrl(
@@ -49,7 +57,12 @@ const Card: React.FC<Props> = ({
         <Link className={styles.title} to={"character/" + character.id}>
           {character.name}
         </Link>
-        <HeartButton onClick={toggleFavourite} full={isFavourite} />
+        <HeartButton
+          onClick={toggleFavourite}
+          full={isFavourite}
+          fillColor={isHovered ? "white" : undefined}
+          hovering={isHovered}
+        />
       </div>
     </div>
   );
