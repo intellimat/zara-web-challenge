@@ -57,18 +57,22 @@ _vite.config.ts_
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
+import svgr from "vite-plugin-svgr";
 
 const isProduction = process.env.NODE_ENV === "production";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), isProduction && ViteImageOptimizer()].filter(Boolean),
+  plugins: [react(), svgr(), isProduction && ViteImageOptimizer()].filter(
+    Boolean
+  ),
   test: {
     globals: true,
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
   },
 });
+
 
 ```
 
@@ -87,10 +91,13 @@ You can run the test by entering:
 - react-router
 - tanstack query (former react query)
 - zustand
+- vitest
+- React Testing Library
 
 ## Project structure
 
 ```
+
 ├── App.css
 ├── App.tsx
 ├── components
@@ -121,18 +128,20 @@ You can run the test by entering:
 ├── customHooks
 │   ├── useCharacterComics.ts
 │   └── useCharacters.ts
+├── icons
+│   ├── empty_heart.svg
+│   ├── full_heart.svg
+│   └── lens.svg
 ├── index.css
 ├── main.tsx
 ├── pages
 │   ├── Character
 │   │   ├── character.module.css
 │   │   └── Character.tsx
-│   ├── FavouriteCharacter
-│   │   ├── favouriteCharacter.module.css
-│   │   └── FavouriteCharacter.tsx
 │   └── Home
 │       ├── home.module.css
-│       └── Home.tsx
+│       ├── Home.tsx
+│       └── homeViewEnum.ts
 ├── query-client.ts
 ├── routing
 │   ├── RootLayout.tsx
@@ -152,27 +161,30 @@ You can run the test by entering:
 │   ├── character.test.tsx
 │   ├── home.test.tsx
 │   ├── mock
+│   │   ├── characterComics.json
 │   │   └── characters.json
 │   └── utils
 │       ├── TestQueryClientProvider.tsx
 │       └── TestRouter.tsx
+├── tree.txt
 ├── types
 │   ├── CharacterComic.ts
 │   └── Character.ts
 ├── utils
-│   └── imgUrlBuilder.ts
+│   ├── imgUrlBuilder.ts
+│   └── sortComics.ts
 └── vite-env.d.ts
+
 ```
 
 ### Routing
 
 React Router was used to manage the SPA routing.
 
-There are three pages:
+There are two pages:
 
 - /
 - /character/:id
-- /favouriteCharacters
 
 Check routing folder to see the details.
 
@@ -204,9 +216,9 @@ Zustand helps manage global state by synchronizing state changes across all the 
 type Store = {
   query: string;
   setQuery: (query: string) => void;
-  favouriteCharacters: Character[];
-  addFavouriteCharacter: (newCharacter: Character) => void;
-  removeFavouriteCharacter: (characterId: number) => void;
+  favouriteCharactersIds: number[];
+  addFavouriteCharacterId: (characterId: number) => void;
+  removeFavouriteCharacterId: (characterId: number) => void;
 }
 ```
 
@@ -237,11 +249,3 @@ Not much emphasis has been put on styling and maintaining a clean styling patter
 No design system is implemented.
 
 CSS Modules were used to scope the style to just one component and avoid unexpected results.
-
-## Why did I convert a list into a _Set_ in **Home.tsx**?
-
-When rendering every character card, we need to check whether the character is a favourite or not. Without using a _Set_, the lookup time for each card would be O(n).
-Since a _Set_ is implemented with a hash table, the lookup time is on average O(1). So by using a Set we improve the overall performance.
-
-- O(n) to render each character card
-- O(1) to check if a character is a favourite

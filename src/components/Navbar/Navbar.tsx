@@ -1,11 +1,17 @@
 import React from "react";
 import styles from "./navbar.module.css";
 import useStore from "../../store/useStore";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import HeartButton from "../HeartButton/HeartButton";
+import { HomeView } from "../../pages/Home/homeViewEnum";
 
 const Navbar: React.FC = () => {
-  const { favouriteCharacters } = useStore();
+  const navigate = useNavigate();
+  const { favouriteCharactersIds: favouriteCharacters } = useStore();
+
+  const redirect = () => {
+    navigate("/?view=" + HomeView.favouriteCharacters);
+  };
 
   return (
     <nav className={styles.navbar} data-testid="navbar">
@@ -13,9 +19,7 @@ const Navbar: React.FC = () => {
         <img src="Marvel_logo.svg" alt="Marvel Logo" />
       </Link>
       <div className={styles.favouriteBtnContainer}>
-        <Link to={"/favouriteCharacters"}>
-          <HeartButton full={true} />
-        </Link>
+        <HeartButton full={true} hovering={false} onClick={redirect} />
         <p>{favouriteCharacters.length}</p>
       </div>
     </nav>

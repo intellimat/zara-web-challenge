@@ -1,13 +1,12 @@
 import { create } from "zustand";
-import { Character } from "../types/Character";
 import { devtools, persist } from "zustand/middleware";
 
 type Store = {
   query: string;
   setQuery: (query: string) => void;
-  favouriteCharacters: Character[];
-  addFavouriteCharacter: (newCharacter: Character) => void;
-  removeFavouriteCharacter: (characterId: number) => void;
+  favouriteCharactersIds: number[];
+  addFavouriteCharacterId: (characterId: number) => void;
+  removeFavouriteCharacterId: (characterId: number) => void;
 };
 
 const useStore = create<Store>()(
@@ -24,24 +23,27 @@ const useStore = create<Store>()(
             false,
             "setQuery"
           ),
-        favouriteCharacters: [],
-        addFavouriteCharacter: (newCharacter: Character) =>
+        favouriteCharactersIds: [],
+        addFavouriteCharacterId: (characterId: number) =>
           set(
             (state) => ({
-              favouriteCharacters: [...state.favouriteCharacters, newCharacter],
+              favouriteCharactersIds: [
+                ...state.favouriteCharactersIds,
+                characterId,
+              ],
             }),
             false,
-            "addFavouriteCharacter"
+            "addFavouriteCharacterId"
           ),
-        removeFavouriteCharacter: (characterId: number) =>
+        removeFavouriteCharacterId: (characterId: number) =>
           set(
             (state) => ({
-              favouriteCharacters: state.favouriteCharacters.filter(
-                (c) => c.id !== characterId
+              favouriteCharactersIds: state.favouriteCharactersIds.filter(
+                (id) => id !== characterId
               ),
             }),
             false,
-            "removeFavouriteCharacter"
+            "removeFavouriteCharacterId"
           ),
       }),
       { name: "marvelCharacters" }

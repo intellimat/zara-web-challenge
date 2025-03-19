@@ -11,30 +11,34 @@ import HeartButton from "../HeartButton/HeartButton";
 interface Props {
   character: Character;
   isFavourite: boolean;
-  addFavouriteCharacter: (character: Character) => void;
-  removeFavouriteCharacter: (characterId: number) => void;
+  addFavouriteCharacterId: (characterId: number) => void;
+  removeFavouriteCharacterId: (characterId: number) => void;
 }
 
 const Card: React.FC<Props> = ({
   character,
   isFavourite,
-  addFavouriteCharacter,
-  removeFavouriteCharacter,
+  addFavouriteCharacterId,
+  removeFavouriteCharacterId,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const toggleFavourite = useCallback(() => {
     if (isFavourite) {
-      removeFavouriteCharacter(character.id);
+      removeFavouriteCharacterId(character.id);
     } else {
-      addFavouriteCharacter(character);
+      addFavouriteCharacterId(character.id);
     }
-  }, [isFavourite, character, addFavouriteCharacter, removeFavouriteCharacter]);
+  }, [
+    isFavourite,
+    character,
+    addFavouriteCharacterId,
+    removeFavouriteCharacterId,
+  ]);
 
   return (
     <div
       className={styles.box}
-      // className={`${styles.box} ${isHovered ? styles.hovering : ""}`}
       data-testid="character-card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
