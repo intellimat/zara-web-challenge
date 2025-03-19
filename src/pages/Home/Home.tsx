@@ -59,6 +59,7 @@ const Home: React.FC = () => {
           numberOfResults={shownCharacters?.length || 0}
         />
         <div className={styles.cardsContainer}>
+          {shownCharacters?.length === 0 && <p>No characters to display.</p>}
           {shownCharacters?.map((character) => (
             <Card
               key={character.id}

@@ -39,7 +39,7 @@ const useStore = create<Store>()(
           set(
             (state) => ({
               favouriteCharactersIds: state.favouriteCharactersIds.filter(
-                (id) => id === characterId
+                (id) => id !== characterId
               ),
             }),
             false,
