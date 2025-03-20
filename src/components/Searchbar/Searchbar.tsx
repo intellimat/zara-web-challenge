@@ -14,7 +14,7 @@ const Searchbar: React.FC<Props> = ({ query, setQuery, numberOfResults }) => {
   };
 
   return (
-    <div data-testid="searchbar">
+    <div>
       <div className={styles.inputWrapper}>
         <SearchIcon className={styles.searchIcon} title="Search icon" />
         <input

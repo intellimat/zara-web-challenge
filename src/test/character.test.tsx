@@ -12,13 +12,12 @@ vi.mock("../services/characterService", () => ({
 }));
 
 describe("Character", () => {
-  beforeEach(() => {
-    vi.resetAllMocks();
+  beforeAll(() => {
+    (services.getAllCharacters as Mock).mockResolvedValue(characters);
+    (services.getCharacterComics as Mock).mockResolvedValue(characterComics);
   });
 
   it("should show the character banner", async () => {
-    (services.getAllCharacters as Mock).mockResolvedValue(characters);
-
     render(
       <TestQueryClientProvider>
         <TestRouter initialEntries={["/character/" + characters[0].id]} />
@@ -30,9 +29,6 @@ describe("Character", () => {
   });
 
   it("should show character comics", async () => {
-    (services.getAllCharacters as Mock).mockResolvedValue(characters);
-    (services.getCharacterComics as Mock).mockResolvedValue(characterComics);
-
     render(
       <TestQueryClientProvider>
         <TestRouter initialEntries={["/character/" + characters[0].id]} />
@@ -44,9 +40,6 @@ describe("Character", () => {
   });
 
   it("should show as many comic cards as the comics returned from the mocked getCharacterComics function", async () => {
-    (services.getAllCharacters as Mock).mockResolvedValue(characters);
-    (services.getCharacterComics as Mock).mockResolvedValue(characterComics);
-
     render(
       <TestQueryClientProvider>
         <TestRouter initialEntries={["/character/" + characters[0].id]} />
