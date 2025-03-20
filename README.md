@@ -78,8 +78,7 @@ export default defineConfig({
 
 ## Test
 
-The app has been tested using _vitest_ and _React Testing Library_.
-
+The app has been tested using _vitest_ and _React Testing Library_.  
 You can run the tests by entering:
 
 `npm test`
@@ -195,12 +194,9 @@ Current implemented tests:
 
 ```
 
-### Routing
-
-React Router was used to manage the SPA routing.
-
-There are two pages:
-
+### Routing  
+React Router was used to manage the SPA routing.  
+There are two pages:  
 - /
 - /character/:id
 
@@ -245,8 +241,7 @@ Note: the store is saved into local storage, so that if you close and open the b
 
 ## Components
 
-Pure components (do not handle any logic, they just display information):
-
+Pure components (do not handle any logic, they just display information):  
 - Banner
 - Slider
 - Searchbar
@@ -254,15 +249,14 @@ Pure components (do not handle any logic, they just display information):
 - HeartButton
 - ComicCard
 
-Other components have a little bit of logic to simplify functionality implementation:
-
+Other components have a little bit of logic to simplify functionality implementation:  
 - CharacterCard
 - Navbar
 
 ## Styling
 
-Not much emphasis has been put on styling and maintaining a clean styling pattern due to the limited implementation time.
-
-No design system is implemented.
-
+Not much emphasis has been put on styling and maintaining a clean styling pattern due to the limited implementation time.  
 CSS Modules were used to scope the style to just one component and avoid unexpected results.
+
+## Errors
+The application relies on the Marvel API and no error handling has been implemented. If you don't see data check on Chrome DevTools whether the API is working correctly.  
