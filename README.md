@@ -80,9 +80,26 @@ export default defineConfig({
 
 The app has been tested using _vitest_ and _React Testing Library_.
 
-You can run the test by entering:
+You can run the tests by entering:
 
 `npm test`
+
+You can run the test coverage by entering:
+
+`npm run coverage`
+
+Current implemented tests:
+✓ src/test/character.test.tsx (3 tests)
+✓ Character > should show the character banner
+✓ Character > should show character comics
+✓ Character > should show as many comic cards as the comics returned from the mocked getCharacterComics function
+✓ src/test/home.test.tsx (6 tests)
+✓ Home page > should show the navbar
+✓ Home page > should render a list of characters
+✓ Home page > should filter by query text on searchbar
+✓ Home page > should increase the number of favourites when clicking on a card heart
+✓ Home page > should show character page when clicking on a character thumbnail
+✓ Home page > should show favourite characters when clicking on the heart button in the navbar
 
 ## Tech stack
 

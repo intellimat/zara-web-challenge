@@ -118,7 +118,6 @@ describe("Home page", () => {
       mockCharacter.name + "-thumbnail"
     );
 
-    screen.debug();
     expect(characterThumbnail).toBeInTheDocument();
   });
 });
