@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import * as services from "../services/characterService";
 import characters from "./mock/characters.json";
 import TestRouter from "./utils/TestRouter";
@@ -16,6 +16,8 @@ describe("Character", () => {
     (services.getAllCharacters as Mock).mockResolvedValue(characters);
     (services.getCharacterComics as Mock).mockResolvedValue(characterComics);
   });
+
+  afterEach(cleanup);
 
   it("should show the character banner", async () => {
     render(
