@@ -1,5 +1,4 @@
-# Zara web challenge
-
+# Zara web challenge  
 React app that shows Marvel characters.
 
 ## Requirements
@@ -26,7 +25,7 @@ and run
 
 You need your personal Marvel API keys to run the project.
 You can get them from [Marvel Developer Portal](https://developer.marvel.com)
-Also, make sure _localhost_ is listed in the allowed domains to make calls to the Marvel API in your Marvel account.
+Also, make sure _localhost_ is listed in the allowed domains in your Marvel account to make calls to the Marvel API.
 
 In your _.env_ file set your private key, public key and timestamp
 
@@ -36,19 +35,15 @@ VITE_MARVEL_API_PUBLIC_KEY=your_public_key
 VITE_MARVEL_API_TIMESTAMP=your_statically_generated_timestamp
 ```
 
-## Run the project
-
-In **develop** mode
-
+## Run the project  
+In **develop** mode  
 `npm run dev`
 
-In **production** mode
-
-`npm run build`
-
+In **production** mode  
+`npm run build`  
 `npm run preview`
 
-Images are optimized during the _build_ process with [vite-plugin-image-optimizer](https://www.npmjs.com/package/vite-plugin-image-optimizer) only on the production environment. Down below you can check the plugin configuration (default).
+Images are optimized during the _build_ process with [vite-plugin-image-optimizer](https://www.npmjs.com/package/vite-plugin-image-optimizer) only on the production environment. Below you can check the plugin configuration (default).
 
 _vite.config.ts_
 
@@ -72,8 +67,6 @@ export default defineConfig({
     setupFiles: ["./vitest.setup.ts"],
   },
 });
-
-
 ```
 
 ## Test
@@ -87,7 +80,7 @@ You can run the test coverage by entering:
 
 `npm run coverage`
 
-Current implemented tests:
+Currently implemented tests:
 
 ✓ src/test/character.test.tsx (3 tests)  
 ✓ Character > should show the character banner  
@@ -114,7 +107,6 @@ Current implemented tests:
 ## Project structure
 
 ```
-
 ├── App.css
 ├── App.tsx
 ├── components
@@ -191,7 +183,6 @@ Current implemented tests:
 │   ├── imgUrlBuilder.ts
 │   └── sortComics.ts
 └── vite-env.d.ts
-
 ```
 
 ### Routing  
@@ -219,11 +210,10 @@ Notice useCharacter() takes _select_ parameter to process the API reponse
 
 As you can see in Character.tsx, the _characterSelector_ function is passed to _useCharacters_ hook as the select function so that we can filter by characterId and display the current character. In Home.tsx the select function is _filterByQuery_ instead, so that we can reactively display the characters based on what the user types into the search bar The useCallback React hook has been used to avoid unnecessary re-rendering of the above functions.
 
-## More on data and State Management
+## More on data and State Management  
+_Tanstack Query_ helps us cache results from the Marvel API so we don't have to make repeated calls. You can see in _query-client.ts_ that we are caching the data from the API in local storage for 24 hours.
 
-Tanstack Query helps us cache results from the Marvel API so we don't have to make repeated calls. You can see in _query-client.ts_ that we are caching the data from the API in local storage for 24 hours.
-
-Zustand helps manage global state by synchronizing state changes across all the UI components. The structure of the store is quite simple:
+_Zustand_ helps manage global state by synchronizing state changes across all the UI components. The structure of the store is quite simple:
 
 ```
 type Store = {
@@ -237,10 +227,9 @@ type Store = {
 
 Check _useStore.ts_ to see the store implementation.
 
-Note: the store is saved into local storage, so that if you close and open the browser you still see the favourite characters.
+Note: the store is saved into local storage, so that if you close and open the browser you still see your favourite characters.
 
-## Components
-
+## Components  
 Pure components (do not handle any logic, they just display information):  
 - Banner
 - Slider
@@ -253,8 +242,7 @@ Other components have a little bit of logic to simplify functionality implementa
 - CharacterCard
 - Navbar
 
-## Styling
-
+## Styling  
 Not much emphasis has been put on styling and maintaining a clean styling pattern due to the limited implementation time.  
 CSS Modules were used to scope the style to just one component and avoid unexpected results.
 
