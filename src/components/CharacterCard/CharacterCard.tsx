@@ -51,7 +51,7 @@ const Card: React.FC<Props> = ({
             ThumbnailLayouts.standard,
             ThumbnailSizes.xlarge
           )}
-          alt={character.name + " thumbnail"}
+          alt={character.name + "-thumbnail"}
           height={200}
           loading="lazy"
         />
@@ -66,6 +66,7 @@ const Card: React.FC<Props> = ({
           full={isFavourite}
           fillColor={isHovered ? "white" : undefined}
           hovering={isHovered}
+          title={character.name + "-heart-button"}
         />
       </div>
     </div>

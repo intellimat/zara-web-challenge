@@ -7,6 +7,7 @@ interface Props {
   full: boolean;
   fillColor?: string;
   onClick?: () => void;
+  title?: string;
   hovering: boolean;
 }
 
@@ -15,6 +16,7 @@ const HeartButton: React.FC<Props> = ({
   onClick,
   fillColor,
   hovering,
+  title,
 }) => {
   return (
     <>
@@ -24,7 +26,7 @@ const HeartButton: React.FC<Props> = ({
             hovering ? styles.hovering : ""
           }`}
           cursor={"pointer"}
-          title="Heart Icon"
+          title={`${title ?? "heart-icon"}`}
           onClick={onClick}
           style={{ "--fill-color": fillColor } as React.CSSProperties}
         />
@@ -32,7 +34,7 @@ const HeartButton: React.FC<Props> = ({
         <EmptyHeartIcon
           cursor={"pointer"}
           className={styles.heartIcon}
-          title="Heart Icon"
+          title={`${title ?? "heart-icon"}`}
           onClick={onClick}
         />
       )}

@@ -14,13 +14,20 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={styles.navbar} data-testid="navbar">
+    <nav className={styles.navbar}>
       <Link to={"/"}>
         <img src="Marvel_logo.svg" alt="Marvel Logo" />
       </Link>
       <div className={styles.favouriteBtnContainer}>
-        <HeartButton full={true} hovering={false} onClick={redirect} />
-        <p>{favouriteCharacters.length}</p>
+        <HeartButton
+          full={true}
+          hovering={false}
+          onClick={redirect}
+          title="navbar-heart-button"
+        />
+        <p aria-label="number of favourite characters">
+          {favouriteCharacters.length}
+        </p>
       </div>
     </nav>
   );
